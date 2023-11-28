@@ -12,8 +12,8 @@ import urlDb from "./data/url";
 dotenv.config();
 
 // Port and host
-const port = process.env.PORT || 3000;
-const host = process.env.HOST || "localhost";
+const port = process.env.APP_PORT || 3000;
+const host = process.env.APP_HOST || "localhost";
 
 // Set up the Cors options
 const corsOptions = {
