@@ -1,12 +1,13 @@
-import express from "express";
-import helmet from "helmet";
-import cors from "cors";
-import dotenv from "dotenv";
-import bodyParser from "body-parser"; //use to parse incoming request bodies
+const express = require("express");
+const helmet = require("helmet");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const bodyParser = require("body-parser"); //use to parse incoming request bodies
 
-import services from "./routes/service";
-import db from "./data/db";
-import urlDb from "./data/url";
+const services = require("./routes/service");
+const db = require("./data/db");
+const url_db = require("./data/url");
+const { async } = require("validate.js");
 
 // Load environment variables from .env file
 dotenv.config();
@@ -25,13 +26,36 @@ const corsOptions = {
 const app = express();
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
-app.use(helmet);
+app.use(helmet());
 app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Endpoints
-// app.use("/service", services);
+app.get("/", async (req, res) => {
+  const all_urls = await db.GetAllUrls();
+  // res.send(all_urls);
+  res.send(all_urls);
+});
+
+app.post("/url", async (req, res) => {
+  const url = req.body.url;
+  try {
+    if (!services.validateUrl(url)) {
+      return res.status(400).send({
+        msg: "Invalid URL...",
+      });
+    }
+    const url_key = services.generateShortUrl();
+    const short_url = `http://${host}:${port}/${url_key}`;
+
+    const result = db.CreateUrl(url, short_url);
+    if (result) return res.status(200).send({ short_url });
+    else throw new Error("An error occurred while creating the URL.");
+  } catch (error) {
+    return res.status(500).send({ msg: "Error. Please try again." });
+  }
+});
 
 app.listen(port, (err) => {
   if (err) {

@@ -1,5 +1,5 @@
-import mysql from "mysql2";
-import dotenv from "dotenv";
+const mysql = require("mysql2");
+const dotenv = require("dotenv");
 
 dotenv.config();
 
@@ -12,35 +12,42 @@ const pool = mysql
   })
   .promise();
 
-export async function GetAllUrls() {
+async function GetAllUrls() {
   const [rows] = await pool.query("select * from urls");
-  pool.end();
+  // pool.end();
   return rows;
 }
 
-export async function GetUrl(id) {
+async function GetUrl(id) {
   if (!Number.isInteger(id)) {
     throw new Error("Invalid id");
   }
   const [rows] = await pool.query("select * from urls where id = ?", [id]);
-  pool.end();
+  // pool.end();
   return rows[0];
 }
 
-export async function CreateUrl(long_url, short_url) {
+async function CreateUrl(long_url, short_url) {
   const [result] = await pool.query(
     "insert into urls (long_url, short_url) values (?, ?)",
     [long_url, short_url]
   );
-  pool.end();
+  // pool.end();
   return GetUrl(result.insertId);
 }
 
-export async function DeleteUrl(id) {
+async function DeleteUrl(id) {
   if (!Number.isInteger(id)) {
     throw new Error("Invalid id");
   }
   const [result] = await pool.query("delete from urls where id = ?", [id]);
-  pool.end();
+  // pool.end();
   return result.affectedRows > 0;
 }
+
+module.exports = {
+  GetAllUrls,
+  GetUrl,
+  CreateUrl,
+  DeleteUrl,
+};
