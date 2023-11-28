@@ -30,6 +30,10 @@ app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.listen(port, () => {
-  console.log("listening port ", port);
+app.listen(port, (err) => {
+  if (err) {
+    console.error("Error starting server: ", err);
+  } else {
+    console.log("Server started on port: ", port);
+  }
 });
