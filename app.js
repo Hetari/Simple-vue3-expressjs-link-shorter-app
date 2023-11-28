@@ -30,6 +30,9 @@ app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// Endpoints
+// app.use("/service", services);
+
 app.listen(port, (err) => {
   if (err) {
     console.error("Error starting server: ", err);

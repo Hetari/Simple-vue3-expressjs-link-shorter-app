@@ -12,13 +12,13 @@ const pool = mysql
   })
   .promise();
 
-async function GetAllUrls() {
+export async function GetAllUrls() {
   const [rows] = await pool.query("select * from urls");
   pool.end();
   return rows;
 }
 
-async function GetUrl(id) {
+export async function GetUrl(id) {
   if (!Number.isInteger(id)) {
     throw new Error("Invalid id");
   }
@@ -27,7 +27,7 @@ async function GetUrl(id) {
   return rows[0];
 }
 
-async function CreateUrl(long_url, short_url) {
+export async function CreateUrl(long_url, short_url) {
   const [result] = await pool.query(
     "insert into urls (long_url, short_url) values (?, ?)",
     [long_url, short_url]
@@ -36,7 +36,7 @@ async function CreateUrl(long_url, short_url) {
   return GetUrl(result.insertId);
 }
 
-async function DeleteUrl(id) {
+export async function DeleteUrl(id) {
   if (!Number.isInteger(id)) {
     throw new Error("Invalid id");
   }
