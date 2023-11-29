@@ -41,7 +41,7 @@
       </div>
       <div class="flex items-center gap-6">
         <button
-          class="bg-[#371f76] text-white px-5 py-2 rounded-full hover:bg-[#64389f] transition duration-300 font-bold"
+          class="bg-[#4f46e5] text-white px-5 py-2 rounded-full hover:bg-[#322cac] transition duration-300 font-bold"
         >
           Sign in
         </button>
