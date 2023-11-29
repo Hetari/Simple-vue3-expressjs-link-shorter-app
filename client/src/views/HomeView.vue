@@ -1,10 +1,11 @@
 <template>
-  <h1>Hello Bootstrap5</h1>
+  <ShortForm />
 </template>
 
 <script>
+import ShortForm from "@/components/ShortForm.vue";
 export default {
   name: "HomeView",
-  components: {},
+  components: { ShortForm },
 };
 </script>
