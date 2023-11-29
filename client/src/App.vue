@@ -1,5 +1,5 @@
 <template>
-  <Nav />
+  <!-- <Nav /> -->
 </template>
 
 <script>

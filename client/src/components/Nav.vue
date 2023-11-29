@@ -1,51 +1,103 @@
 <template>
-  <!-- Sidebar -->
-  <div class="container-fluid">
-    <div class="row fix">
-      <div class="bg-white col-auto min-vh-100">
-        <!-- <div> -->
-        <a
-          href=""
-          class="mx-5 mt-5 py-5 d-flex align-items-center text-decoration-none text-uppercase fw-bold"
+  <header class="bg-white">
+    <nav class="flex justify-between items-center w-[92%] mx-auto">
+      <div>
+        <h1 class="text-2xl uppercase py-4 font-bold">
+          Link<span class="text-[#64389f]">on</span>
+        </h1>
+      </div>
+      <div
+        class="nav-links duration-500 md:static absolute bg-white md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto w-full flex items-center px-5"
+      >
+        <ul
+          class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8"
         >
-          <i class="fs-5 fa"></i>
-          <span class="fs-4 d-none d-sm-inline link-so"
-            >link <span>so</span></span
-          >
-        </a>
-        <div class="mb-5 bg-secondary w-75 h-rule m-auto"></div>
-
-        <ul class="nav nav-pills flex-column">
-          <li class="nav-item fw-bold">
-            <a href="" class="nav-link text-dark">
-              <i class="fa-solid fa-house pe-2"></i>
-              Home</a
+          <li>
+            <a class="hover:text-[#64389f] transition duration-300" href="#"
+              >Products</a
             >
           </li>
-          <li class="nav-item fw-bold">
-            <a href="" class="nav-link text-dark">
-              <i class="fa-solid fa-link pe-2"></i>
-              Link Shorter</a
+          <li>
+            <a class="hover:text-[#64389f] transition duration-300" href="#"
+              >Solution</a
             >
           </li>
-          <li class="nav-item fw-bold">
-            <a href="" class="nav-link text-dark">
-              <i class="fa-solid fa-gear pe-2"></i>
-              Settings</a
+          <li>
+            <a class="hover:text-[#64389f] transition duration-300" href="#"
+              >Resource</a
+            >
+          </li>
+          <li>
+            <a class="hover:text-[#64389f] transition duration-300" href="#"
+              >Developers</a
+            >
+          </li>
+          <li>
+            <a class="hover:text-[#64389f] transition duration-300" href="#"
+              >Pricing</a
             >
           </li>
         </ul>
-        <!-- </div> -->
       </div>
-    </div>
-  </div>
+      <div class="flex items-center gap-6">
+        <button
+          class="bg-[#371f76] text-white px-5 py-2 rounded-full hover:bg-[#64389f] transition duration-300 font-bold"
+        >
+          Sign in
+        </button>
+        <ion-icon
+          onclick="onToggleMenu(this)"
+          name="menu"
+          class="text-3xl cursor-pointer md:hidden"
+        ></ion-icon>
+      </div>
+    </nav>
+  </header>
   <router-view />
 </template>
 
 <script>
-export default {};
-</script>
+// Burger menus
+document.addEventListener("DOMContentLoaded", function () {
+  // open
+  const burger = document.querySelectorAll(".navbar-burger");
+  const menu = document.querySelectorAll(".navbar-menu");
 
+  if (burger.length && menu.length) {
+    for (var i = 0; i < burger.length; i++) {
+      burger[i].addEventListener("click", function () {
+        for (var j = 0; j < menu.length; j++) {
+          menu[j].classList.toggle("hidden");
+        }
+      });
+    }
+  }
+
+  // close
+  const close = document.querySelectorAll(".navbar-close");
+  const backdrop = document.querySelectorAll(".navbar-backdrop");
+
+  if (close.length) {
+    for (var i = 0; i < close.length; i++) {
+      close[i].addEventListener("click", function () {
+        for (var j = 0; j < menu.length; j++) {
+          menu[j].classList.toggle("hidden");
+        }
+      });
+    }
+  }
+
+  if (backdrop.length) {
+    for (var i = 0; i < backdrop.length; i++) {
+      backdrop[i].addEventListener("click", function () {
+        for (var j = 0; j < menu.length; j++) {
+          menu[j].classList.toggle("hidden");
+        }
+      });
+    }
+  }
+});
+</script>
 <style>
 :root {
   --main-color: #4e60ff;

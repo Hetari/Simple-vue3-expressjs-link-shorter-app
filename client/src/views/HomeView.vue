@@ -1,5 +1,5 @@
 <template>
-  <ShortForm />
+  <!-- <ShortForm /> -->
 </template>
 
 <script>
