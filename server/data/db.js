@@ -14,7 +14,6 @@ const pool = mysql
 
 async function GetAllUrls() {
   const [rows] = await pool.query("select * from urls");
-  // pool.end();
   return rows;
 }
 
@@ -23,7 +22,6 @@ async function GetUrl(id) {
     throw new Error("Invalid id");
   }
   const [rows] = await pool.query("select * from urls where id = ?", [id]);
-  // pool.end();
   return rows[0];
 }
 
@@ -32,7 +30,6 @@ async function CreateUrl(long_url, short_url) {
     "insert into urls (long_url, short_url) values (?, ?)",
     [long_url, short_url]
   );
-  // pool.end();
   return GetUrl(result.insertId);
 }
 
@@ -41,7 +38,6 @@ async function DeleteUrl(id) {
     throw new Error("Invalid id");
   }
   const [result] = await pool.query("delete from urls where id = ?", [id]);
-  // pool.end();
   return result.affectedRows > 0;
 }
 

@@ -34,7 +34,6 @@ app.use(bodyParser.json());
 // Endpoints
 app.get("/", async (req, res) => {
   const all_urls = await db.GetAllUrls();
-  // res.send(all_urls);
   res.send(all_urls);
 });
 
