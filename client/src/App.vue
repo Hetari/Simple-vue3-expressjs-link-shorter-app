@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import Nav from "@/components/Nav.vue";
+import Nav from "@/components/NavComponent.vue";
 // import Login from "@/components/Login.vue";
 // import Register from "@/components/Register.vue";
 export default {

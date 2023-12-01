@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import ShortForm from "@/components/ShortForm.vue";
+import ShortForm from "@/components/ShortFormComponent.vue";
 export default {
   name: "HomeView",
   components: { ShortForm },

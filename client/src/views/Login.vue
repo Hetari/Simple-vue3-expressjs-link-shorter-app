@@ -35,9 +35,9 @@
 </template>
 
 <script>
-import FirstLook from "@/components/FirstLook.vue";
-import Input from "@/components/Input.vue";
-import Btn from "@/components/Btn.vue";
+import FirstLook from "@/components/FirstLookComponent.vue";
+import Input from "@/components/InputComponent.vue";
+import Btn from "@/components/BtnComponent.vue";
 
 export default {
   name: "login",
