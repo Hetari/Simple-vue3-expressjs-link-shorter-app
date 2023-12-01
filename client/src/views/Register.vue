@@ -25,7 +25,7 @@
           type="password"
           :required="true"
         />
-        <BtnComponent text="Create" />
+        <Btn text="Create an account" />
       </form>
     </div>
   </div>

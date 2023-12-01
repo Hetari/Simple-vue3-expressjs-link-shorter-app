@@ -33,12 +33,13 @@ app.use(bodyParser.json());
 
 // Endpoints
 app.get("/", async (req, res) => {
-  const all_urls = await db.GetAllUrls();
-  res.send(all_urls);
+  // const all_urls = await db.GetAllUrls();
+  // res.send(all_urls);
+  res.send("Hello world");
 });
 
-app.post("/url/:short", async (req, res) => {
-  const url = req.body.short;
+app.post("/short/:url", async (req, res) => {
+  const url = req.body.url;
   try {
     if (!services.validateUrl(url)) {
       return res.status(400).send({

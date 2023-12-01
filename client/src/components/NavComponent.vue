@@ -9,7 +9,7 @@
       <div
         class="nav-links duration-500 md:static absolute bg-white md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto w-full flex items-center px-5"
       >
-        <ul
+        <!-- <ul
           class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8"
         >
           <li>
@@ -37,9 +37,15 @@
               >Pricing</a
             >
           </li>
-        </ul>
+        </ul> -->
       </div>
       <div class="flex items-center gap-6">
+        <button
+          class="text-[#4f46e5] px-5 py-2 rounded-full hover:text-[#322cac] transition duration-300 font-bold"
+        >
+          Log in
+        </button>
+
         <button
           class="bg-[#4f46e5] text-white px-5 py-2 rounded-full hover:bg-[#322cac] transition duration-300 font-bold"
         >
