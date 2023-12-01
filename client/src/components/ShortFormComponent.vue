@@ -3,7 +3,7 @@
     <div class="row justify-content-end">
       <div class="col-lg-10 col-md-8 col-sm-8">
         <h1>Create a Shortlink</h1>
-        <form method="post" action="" @submit="handleSubmit">
+        <form method="POST" action="" @submit="handleSubmit">
           <div class="mb-3">
             <label for="originalUrl" class="form-label">Original URL</label>
             <input
