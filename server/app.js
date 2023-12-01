@@ -3,6 +3,7 @@ const helmet = require("helmet");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser"); //use to parse incoming request bodies
+const authRoutes = require("./routes/authRoutes");
 
 const services = require("./routes/service");
 const db = require("./data/db");
@@ -30,6 +31,7 @@ app.use(helmet());
 app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.json());
 
 // Endpoints
 app.get("/", async (req, res) => {
@@ -58,6 +60,8 @@ app.post("/short/:url", async (req, res) => {
     return res.status(500).send({ msg: "Error. Please try again." });
   }
 });
+
+app.use(authRoutes);
 
 app.listen(port, (err) => {
   if (err) {
