@@ -7,8 +7,20 @@
         tone="Sign in to your account"
       />
       <form class="space-y-6" action="#" method="POST">
-        <Input name="email" type="email" :required="true" />
-        <Input name="password" type="password" :required="true" />
+        <Input
+          labelName="Email address"
+          id="email"
+          name="email"
+          type="email"
+          :required="true"
+        />
+        <Input
+          labelName="Password"
+          id="password"
+          name="password"
+          type="password"
+          :required="true"
+        />
         <div class="text-sm text-center">
           <a
             href="#"

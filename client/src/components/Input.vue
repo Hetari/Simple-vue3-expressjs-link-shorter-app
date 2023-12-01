@@ -1,14 +1,11 @@
 <template>
   <div>
-    <label for="email" class="block text-sm font-medium leading-6 text-gray-900"
-      >{{
-        this.name.charAt(0).toUpperCase() + this.name.slice(1)
-      }}
-      address</label
-    >
+    <label :for="id" class="block text-sm font-medium leading-6 text-gray-900"
+      >{{ labelName }}
+    </label>
     <div class="mt-2">
       <input
-        :id="name"
+        :id="id"
         :name="name"
         :type="type"
         :required="required"
@@ -21,7 +18,7 @@
 <script>
 export default {
   name: "Input",
-  props: ["name", "type", "required"],
+  props: ["labelName", "id", "name", "type", "required"],
 };
 </script>
 
