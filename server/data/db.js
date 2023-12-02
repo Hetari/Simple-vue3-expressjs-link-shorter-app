@@ -41,9 +41,70 @@ async function DeleteUrl(id) {
   return result.affectedRows > 0;
 }
 
+async function GetAllUsers() {
+  const query = "SELECT * FROM users";
+  const [rows] = await pool.query(query);
+  return rows;
+}
+
+async function CreateUser(email, password) {
+  const query = "INSERT INTO users (email, password) VALUES (?, ?)";
+  const values = [email, password];
+  try {
+    const [result] = await pool.query(query, values);
+    return GetUserById(result.insertId);
+  } catch (error) {
+    if (error.code === "ER_DUP_ENTRY") {
+      return { status: 400, msg: "Email address already exists" };
+    } else if (error.code === "ER_BAD_NULL_ERROR")
+      return { status: 400, msg: "Email and password are required" };
+    else {
+      return error;
+    }
+  }
+}
+
+async function GetUserById(id) {
+  const query = "SELECT * FROM users WHERE id = ?";
+  const values = [id];
+
+  const [rows] = await pool.query(query, values);
+  return rows[0];
+}
+
+async function GetUserByEmail(email) {
+  const query = "SELECT * FROM users WHERE email = ? LIMIT 1";
+  const values = [email];
+
+  const [rows] = await pool.query(query, values);
+  return rows[0];
+}
+
+async function UpdateUser(id, name, email, password) {
+  const query = "UPDATE users SET email = ?, password = ? WHERE id = ?";
+  const values = [email, password, id];
+
+  const [result] = await pool.query(query, values);
+  return result.affectedRows > 0;
+}
+
+async function DeleteUser(id) {
+  const query = "DELETE FROM users WHERE id = ?";
+  const values = [id];
+
+  const [result] = await pool.query(query, values);
+  return result.affectedRows > 0;
+}
+
 module.exports = {
   GetAllUrls,
   GetUrl,
   CreateUrl,
   DeleteUrl,
+  CreateUser,
+  GetAllUsers,
+  GetUserById,
+  GetUserByEmail,
+  UpdateUser,
+  DeleteUser,
 };
