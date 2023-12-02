@@ -3,6 +3,7 @@ const helmet = require("helmet");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser"); //use to parse incoming request bodies
+const cookieParser = require("cookie-parser");
 const authRoutes = require("./routes/authRoutes");
 
 const services = require("./routes/service");
@@ -32,6 +33,7 @@ app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.json());
+app.use(cookieParser());
 
 // Endpoints
 app.get("/", async (req, res) => {

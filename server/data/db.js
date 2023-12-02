@@ -52,7 +52,8 @@ async function CreateUser(email, password) {
   const values = [email, password];
   try {
     const [result] = await pool.query(query, values);
-    return GetUserById(result.insertId);
+    // return GetUserById(result.insertId);
+    return result.insertId;
   } catch (error) {
     if (error.code === "ER_DUP_ENTRY") {
       return { status: 400, msg: "Email address already exists" };

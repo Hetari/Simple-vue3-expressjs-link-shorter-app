@@ -21,10 +21,7 @@ module.exports.signup_post = async (req, res) => {
       msg: user && user.msg ? user.msg : "Failed to create user",
     });
   } else {
-    return res.status(201).send({
-      msg: "User created successfully",
-      user: user,
-    });
+    return res.status(201).send({ user });
   }
 };
 
