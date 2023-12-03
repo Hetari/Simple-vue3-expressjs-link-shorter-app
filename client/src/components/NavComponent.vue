@@ -8,37 +8,7 @@
       </div>
       <div
         class="nav-links duration-500 md:static absolute bg-white md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto w-full flex items-center px-5"
-      >
-        <!-- <ul
-          class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8"
-        >
-          <li>
-            <a class="hover:text-[#64389f] transition duration-300" href="#"
-              >Products</a
-            >
-          </li>
-          <li>
-            <a class="hover:text-[#64389f] transition duration-300" href="#"
-              >Solution</a
-            >
-          </li>
-          <li>
-            <a class="hover:text-[#64389f] transition duration-300" href="#"
-              >Resource</a
-            >
-          </li>
-          <li>
-            <a class="hover:text-[#64389f] transition duration-300" href="#"
-              >Developers</a
-            >
-          </li>
-          <li>
-            <a class="hover:text-[#64389f] transition duration-300" href="#"
-              >Pricing</a
-            >
-          </li>
-        </ul> -->
-      </div>
+      ></div>
       <div class="flex items-center gap-6">
         <button
           class="text-[#4f46e5] px-5 py-2 rounded-full hover:text-[#322cac] transition duration-300 font-bold"
@@ -51,11 +21,6 @@
         >
           Sign in
         </button>
-        <ion-icon
-          onclick="onToggleMenu(this)"
-          name="menu"
-          class="text-3xl cursor-pointer md:hidden"
-        ></ion-icon>
       </div>
     </nav>
   </header>
