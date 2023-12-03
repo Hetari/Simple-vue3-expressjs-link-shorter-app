@@ -89,7 +89,9 @@ export default {
               "The email is not correct, is repeated or the password doesn't match."
             );
         })
-        .then((data) => {})
+        .then((data) => {
+          this.$router.push("/short");
+        })
         .catch((error) => {
           alert(error);
         });

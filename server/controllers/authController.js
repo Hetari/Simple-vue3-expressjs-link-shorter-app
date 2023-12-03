@@ -40,11 +40,10 @@ module.exports.login_get = (req, res) => {};
 module.exports.login_post = async (req, res) => {
   let { email, password } = req.body;
   email = email.toLowerCase().trim();
-  password = password.trim();
+  password = password.toString().trim();
   if (!isEmail(email)) {
     return res.status(400).send(new Error("Invalid email address"));
   }
-
   const user = await db.GetUserByEmail(email);
 
   if (!user) {
@@ -54,18 +53,10 @@ module.exports.login_post = async (req, res) => {
   }
   const password_hash = user.password;
   if (!bcrypt.compare(password, password_hash)) {
-    return res.status(401).send(Error("Invalid password"));
+    return res.status(401).send(new Error("Invalid password"));
   }
-  const token = jwt.sign(
-    {
-      id: user.id,
-      email: user.email,
-    },
-    secret,
-    {
-      expiresIn: 3600,
-    }
-  );
+  const token = createToken(user);
+
   res.status(200).send({
     token,
   });

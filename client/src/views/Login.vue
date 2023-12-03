@@ -66,7 +66,7 @@ export default {
     async handleLogin(event) {
       event.preventDefault();
 
-      fetch(`${process.env.VUE_APP_BACKEND_HOST}signin`, {
+      fetch(`${process.env.VUE_APP_BACKEND_HOST}login`, {
         method: "POST",
         body: JSON.stringify({
           email: this.email,
@@ -80,14 +80,12 @@ export default {
           if (response.ok) {
             return response.json();
           } else {
-            alert(
-              "The email is not correct, is repeated or the password doesn't match."
-            );
+            alert("The email or the password is not correct.");
             this.$router.push("/signin");
           }
         })
         .then((data) => {
-          this.$router.push("/");
+          this.$router.push("/short");
         })
         .catch((error) => {
           alert(error);
