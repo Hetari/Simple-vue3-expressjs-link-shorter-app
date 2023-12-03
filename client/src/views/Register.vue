@@ -14,11 +14,6 @@
               v-model="email"
               required
             />
-            <!-- <p v-if="emptyEmail" class="label-error">Email is required</p>
-            <p v-if="invalidEmail" class="label-error">Email is not valid</p>
-            <p v-if="repeatedEmail" class="label-error"> -->
-            <!-- Email is already in use
-            </p> -->
           </div>
         </div>
 
@@ -74,12 +69,6 @@ export default {
   methods: {
     async handleRegister(event) {
       event.preventDefault();
-      if (this.email.length == 0) {
-        this.emptyEmail = true;
-        return;
-      } else {
-        this.emptyEmail = false;
-      }
 
       fetch(`${process.env.VUE_APP_BACKEND_HOST}signup`, {
         method: "POST",
@@ -104,7 +93,6 @@ export default {
         .catch((error) => {
           alert(error);
         });
-      this.$router.push("/");
     },
   },
 };
@@ -116,9 +104,5 @@ export default {
 }
 .label {
   @apply block text-sm font-medium leading-6 text-gray-900;
-}
-
-.label-error {
-  @apply block text-sm font-medium leading-6 text-red-500;
 }
 </style>

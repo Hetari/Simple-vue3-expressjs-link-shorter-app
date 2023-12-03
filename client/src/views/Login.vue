@@ -1,26 +1,40 @@
 <template>
   <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <FirstLook
+      logo_sign="link"
+      focus_sign="on"
+      tone="Sign in to your account"
+    />
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <FirstLook
-        logo_sign="link"
-        focus_sign="on"
-        tone="Sign in to your account"
-      />
-      <form class="space-y-6" action="#" method="POST">
-        <Input
-          labelName="Email address"
-          id="email"
-          name="email"
-          type="email"
-          :required="true"
-        />
-        <Input
-          labelName="Password"
-          id="password"
-          name="password"
-          type="password"
-          :required="true"
-        />
+      <form class="space-y-6" @submit="handleLogin">
+        <div>
+          <label for="email" class="label">Email</label>
+          <div class="mt-2">
+            <input
+              id="email"
+              class="user_input"
+              name="email"
+              type="email"
+              v-model="email"
+              :required="true"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label for="password" class="label">Password</label>
+          <div class="mt-2">
+            <input
+              id="password"
+              class="user_input"
+              name="password"
+              type="password"
+              v-model="password"
+              :required="true"
+            />
+          </div>
+        </div>
+
         <div class="text-sm text-center">
           <a
             href="#"
@@ -42,7 +56,43 @@ export default {
   name: "login",
   components: { FirstLook, Btn },
   data() {
-    return {};
+    return {
+      email: "",
+      password: "",
+      repeated_password: "",
+    };
+  },
+  methods: {
+    async handleLogin(event) {
+      event.preventDefault();
+
+      fetch(`${process.env.VUE_APP_BACKEND_HOST}signin`, {
+        method: "POST",
+        body: JSON.stringify({
+          email: this.email,
+          password: this.password,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            alert(
+              "The email is not correct, is repeated or the password doesn't match."
+            );
+            this.$router.push("/signin");
+          }
+        })
+        .then((data) => {
+          this.$router.push("/");
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    },
   },
 };
 </script>
@@ -77,9 +127,8 @@ svg {
   stroke-dashoffset: 361px;
   transition: stroke 0.25s ease var(--stroke-delay, 0s), stroke-dasharray 0.35s;
 }
-/* h1:hover, */
+
 svg:hover {
-  /* --spacing: 4px; */
   --stroke: var(--line-active);
   --stroke-delay: 0.1s;
   --offset: 200px;
