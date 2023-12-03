@@ -1,30 +1,56 @@
 <template>
   <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
     <FirstLook logo_sign="link" focus_sign="on" tone="Create an account" />
-
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form class="space-y-6" action="#" method="POST">
-        <Input
-          labelName="Email address"
-          id="email"
-          name="email"
-          type="email"
-          :required="true"
-        />
-        <Input
-          labelName="Password"
-          id="password"
-          name="password"
-          type="password"
-          :required="true"
-        />
-        <Input
-          labelName="Password Conform"
-          id="conf_password"
-          name="conform password"
-          type="password"
-          :required="true"
-        />
+      <form class="space-y-6" @submit="handleRegister">
+        <div>
+          <label for="email" class="label">Email address</label>
+          <div class="mt-2">
+            <input
+              id="email"
+              class="user_input"
+              name="email"
+              type="text"
+              v-model="email"
+              required
+            />
+            <!-- <p v-if="emptyEmail" class="label-error">Email is required</p>
+            <p v-if="invalidEmail" class="label-error">Email is not valid</p>
+            <p v-if="repeatedEmail" class="label-error"> -->
+            <!-- Email is already in use
+            </p> -->
+          </div>
+        </div>
+
+        <div>
+          <label for="password" class="label">Password</label>
+          <div class="mt-2">
+            <input
+              id="password"
+              class="user_input"
+              name="password"
+              type="password"
+              v-model="password"
+              required
+            />
+          </div>
+        </div>
+        <div>
+          <label for="repeated_password" class="label"
+            >Repeat the password</label
+          >
+          <div class="mt-2">
+            <input
+              id="repeated_password"
+              class="user_input"
+              name="repeated_password"
+              type="repeated_password"
+              v-model="repeated_password"
+              required
+            />
+          </div>
+        </div>
+
         <Btn text="Create an account" />
       </form>
     </div>
@@ -33,14 +59,66 @@
 
 <script>
 import FirstLook from "@/components/FirstLookComponent.vue";
-import Input from "@/components/InputComponent.vue";
 import Btn from "@/components/BtnComponent.vue";
 
 export default {
   name: "register",
-  components: { FirstLook, Input, Btn },
+  components: { FirstLook, Btn },
   data() {
-    return {};
+    return {
+      email: "",
+      password: "",
+      repeated_password: "",
+    };
+  },
+  methods: {
+    async handleRegister(event) {
+      event.preventDefault();
+      if (this.email.length == 0) {
+        this.emptyEmail = true;
+        return;
+      } else {
+        this.emptyEmail = false;
+      }
+
+      fetch(`${process.env.VUE_APP_BACKEND_HOST}signup`, {
+        method: "POST",
+        body: JSON.stringify({
+          email: this.email,
+          password: this.password,
+          repeated_password: this.repeated_password,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else
+            alert(
+              "The email is not correct, is repeated or the password doesn't match."
+            );
+        })
+        .then((data) => {})
+        .catch((error) => {
+          alert(error);
+        });
+      this.$router.push("/");
+    },
   },
 };
 </script>
+
+<style>
+.user_input {
+  @apply block w-full rounded-md border-0 py-1.5 ps-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6;
+}
+.label {
+  @apply block text-sm font-medium leading-6 text-gray-900;
+}
+
+.label-error {
+  @apply block text-sm font-medium leading-6 text-red-500;
+}
+</style>

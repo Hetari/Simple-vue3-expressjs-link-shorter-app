@@ -56,9 +56,9 @@ async function CreateUser(email, password) {
     return result.insertId;
   } catch (error) {
     if (error.code === "ER_DUP_ENTRY") {
-      return { status: 400, msg: "Email address already exists" };
+      return new Error("Email address already exists");
     } else if (error.code === "ER_BAD_NULL_ERROR")
-      return { status: 400, msg: "Email and password are required" };
+      return new Error("Email and password are required");
     else {
       return error;
     }

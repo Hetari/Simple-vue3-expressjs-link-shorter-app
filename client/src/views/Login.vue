@@ -36,12 +36,11 @@
 
 <script>
 import FirstLook from "@/components/FirstLookComponent.vue";
-import Input from "@/components/InputComponent.vue";
 import Btn from "@/components/BtnComponent.vue";
 
 export default {
   name: "login",
-  components: { FirstLook, Input, Btn },
+  components: { FirstLook, Btn },
   data() {
     return {};
   },

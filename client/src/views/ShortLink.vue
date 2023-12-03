@@ -4,7 +4,6 @@
       novalidate
       method="POST"
       class="h-full items-center justify-center flex flex-col max-w-md mx-auto"
-      @submit="handleSubmit"
     >
       <div class="relative z-0 w-full mb-5 group">
         <input
@@ -47,25 +46,23 @@ export default {
   },
   methods: {
     async handleSubmit(event) {
-      event.preventDefault();
-
-      // Make the HTTP request using fetch
-      fetch("http://localhost:3000/short/url", {
-        method: "POST",
-        body: JSON.stringify({ floating_url: this.floating_url }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-
-      this.floating_url = "";
+      //   event.preventDefault();
+      //   // Make the HTTP request using fetch
+      //   fetch("http://localhost:3000/short/url", {
+      //     method: "POST",
+      //     body: JSON.stringify({ floating_url: this.floating_url }),
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //   })
+      //     .then((response) => response.json())
+      //     .then((data) => {
+      //       console.log(data);
+      //     })
+      //     .catch((error) => {
+      //       console.error(error);
+      //     });
+      //   this.floating_url = "";
     },
   },
 };

@@ -42,26 +42,26 @@ app.get("/", async (req, res) => {
   res.send("Hello world");
 });
 
-app.post("/short/:url", async (req, res) => {
-  const url = req.body.url;
-  try {
-    if (!services.validateUrl(url)) {
-      return res.status(400).send({
-        msg: "Invalid URL...",
-      });
-    }
-    const url_key = services.generateShortUrl();
-    const short_url = `http://${host}:${port}/${url_key}`;
+// app.post("/short/:url", async (req, res) => {
+//   const url = req.body.url;
+//   try {
+//     if (!services.validateUrl(url)) {
+//       return res.status(400).send({
+//         msg: "Invalid URL...",
+//       });
+//     }
+//     const url_key = services.generateShortUrl();
+//     const short_url = `http://${host}:${port}/${url_key}`;
 
-    console.log(short_url);
-    res.status(200).send(short_url);
-    // const result = await db.CreateUrl(url, short_url);
-    // if (result) return
-    // else throw new Error("An error occurred while creating the URL.");
-  } catch (error) {
-    return res.status(500).send({ msg: "Error. Please try again." });
-  }
-});
+//     console.log(short_url);
+//     res.status(200).send(short_url);
+//     // const result = await db.CreateUrl(url, short_url);
+//     // if (result) return
+//     // else throw new Error("An error occurred while creating the URL.");
+//   } catch (error) {
+//     return res.status(500).send({ msg: "Error. Please try again." });
+//   }
+// });
 
 app.use(authRoutes);
 
